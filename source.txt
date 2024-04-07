@@ -1,0 +1,18 @@
+Go: https://go.dev/dl/?mode=json
+node (LTS): https://nodejs.org/dist/v20.12.1/node-v20.12.1-x64.msi
+node (Latest): https://nodejs.org/dist/v21.7.2/node-v21.7.2-x64.msi
+node: https://nodejs.org/dist/index.json
+dotnet: https://raw.githubusercontent.com/dotnet/core/main/release-notes/releases-index.json
+https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/releases-index.json
+OracleJDK: https://www.oracle.com/java/technologies/downloads/#jdk22-windows
+dotnet: https://download.visualstudio.microsoft.com/download/pr/9e753d68-7701-4ddf-b358-79d64e776945/2a58564c6d0779a7b443a692c520782f/dotnet-sdk-8.0.203-win-x64.exe
+Chrome: https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B64995B5D-6133-BD8B-86BB-720073F45D73%7D%26lang%3Den-GB%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/update2/installers/ChromeSetup.exe
+
+IDEA: https://download.jetbrains.com/idea/ideaIU-2024.1.exe
+Steam: https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe
+Telegram: https://telegram.org/dl/desktop/win64
+mac, win, linux, win64_portable, win_portable
+WinAppRuntime: https://aka.ms/windowsappsdk/1.4/1.4.240211001/windowsappruntimeinstall-x64.exe
+https://github.com/microsoft/WindowsAppSDK/releases?page=2
+https://aka.ms/windowsappsdk/1.5/latest/windowsappruntimeinstall-x64.exe
+https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/release-channels
