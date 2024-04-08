@@ -1,7 +1,6 @@
 package serv
 
 import (
-	"fmt"
 	"github.com/KevinZonda/repo/repo_collection"
 	"github.com/KevinZonda/repo/repo_standard"
 	"github.com/gin-gonic/gin"
@@ -73,12 +72,22 @@ func Html(r *gin.Engine) {
 				platfm = "win"
 			}
 		}
-		fmt.Println(platfm)
+		platformName := ""
+		switch platfm {
+		case "win":
+			platformName = "Windows"
+		case "mac":
+			platformName = "macOS (Darwin)"
+		case "linux":
+			platformName = "Linux"
+		default:
+			platformName = "Unknown"
+		}
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
-			"title":    "Main website",
-			"UA":       ua,
-			"seq":      seq().Template(),
-			"platform": platfm,
+			"UA":           ua,
+			"seq":          seq().Template(),
+			"platform":     platfm,
+			"platformName": platformName,
 		})
 	})
 

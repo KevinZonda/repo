@@ -1,4 +1,15 @@
-<p>Platform: {{.platform}}</p>
+<head>
+    <title>KevinZonda's Binary Repository</title>
+</head>
+<body>
+
+<h1>KevinZonda's Binary Repository</h1>
+
+<p>
+KevinZonda's Binary Repository (KBR) is a repository without distribution binaries by itself.
+</p>
+
+<p>Current Selected Platform: <em>{{.platformName}} ({{.platform}})</em></p>
 <p>Available Platform:
     <a href="?platform=win">Windows</a>
     <a href="?platform=linux">Linux</a>
@@ -6,7 +17,8 @@
 </p>
 <p>UA: {{.UA}}</p>
 
-<br>
+<hr>
+<h2>Package List</h2>
 
 {{range $idx, $pkg := .seq.packages}}
     {{$pkg.display_name}}
@@ -39,4 +51,22 @@
     <br>
 {{end}}
 
-<p>Updated at: {{.seq.updated}}</p>
+<br>
+<hr>
+<h2>How it works?</h2>
+
+KBR grabs or collects different softwares' distribution urls and update them automatically.
+
+<br>
+<hr>
+
+<h2>Fancy a direct link?</h2>
+Try access binary via https://repo.kevinzonda.com/package/{packName}/{version}/{os}/{arch}<br>
+os: "win", "mac", "linux"<br>
+arch: "x64", "x86", "arm64"
+
+<br>
+<hr>
+<em>Last Updated at: {{.seq.updated}}</em>
+<p>Copyright &copy; 2024 KevinZonda</p>
+</body>
