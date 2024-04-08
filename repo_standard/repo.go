@@ -1,10 +1,12 @@
 package repo_standard
 
+import "time"
+
 type VersionedUrls map[string]VersionedUrl
 
 type VersionedUrl struct {
-	Version string
-	Urls    map[Platform]map[Arch]string
+	Version string                       `json:"version"`
+	Urls    map[Platform]map[Arch]string `json:"urls"`
 }
 
 func Latest(versionedUrls map[Platform]map[Arch]string) VersionedUrls {
@@ -47,12 +49,13 @@ type ComposedName string
 //}
 
 type Package struct {
-	DisplayName string
-	UName       string
-	Category    string
-	Urls        VersionedUrls
+	DisplayName string        `json:"display_name"`
+	UName       string        `json:"uid"`
+	Category    string        `json:"category"`
+	Versions    VersionedUrls `json:"versions"`
 }
 
 type FullRepository struct {
-	Packages map[string]Package
+	Updated  time.Time          `json:"updated"`
+	Packages map[string]Package `json:"packages"`
 }

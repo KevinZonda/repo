@@ -23,7 +23,7 @@ func (t Telegram) GetPackage() repo_standard.Package {
 		DisplayName: "Telegram",
 		UName:       "telegram",
 		Category:    "Entertainment",
-		Urls: repo_standard.Latest(map[repo_standard.Platform]map[repo_standard.Arch]string{
+		Versions: repo_standard.Latest(map[repo_standard.Platform]map[repo_standard.Arch]string{
 			repo_standard.PlatformWin: {
 				repo_standard.ArchX64: TelegramDl["win64"],
 				repo_standard.ArchX86: TelegramDl["win"],

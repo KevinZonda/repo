@@ -17,7 +17,7 @@ func (s Steam) GetPackage() repo_standard.Package {
 		DisplayName: "Steam",
 		UName:       "steam",
 		Category:    "Entertainment",
-		Urls: repo_standard.Latest(map[repo_standard.Platform]map[repo_standard.Arch]string{
+		Versions: repo_standard.Latest(map[repo_standard.Platform]map[repo_standard.Arch]string{
 			repo_standard.PlatformWin: {
 				repo_standard.ArchX64:   SteamDl["win"],
 				repo_standard.ArchARM64: SteamDl["win"],
