@@ -1,7 +1,5 @@
 package repo_standard
 
-import "strings"
-
 type Platform string
 
 const (
@@ -18,3 +16,17 @@ const (
 	ArchARM64 Arch = "arm64"
 	ArchARMv7 Arch = "armv7"
 )
+
+type IRepo interface {
+	ISync
+	GetPackage() Package
+}
+
+type ISync interface {
+	Sync()
+}
+
+type BaseSync struct {
+}
+
+func (b BaseSync) Sync() {}

@@ -1,6 +1,7 @@
 package node
 
 import (
+	"github.com/KevinZonda/repo/repo_standard"
 	"time"
 )
 
@@ -105,4 +106,37 @@ var rules = map[string]ConversionRule{
 	// "win-x86-exe":   {FileName: "x86", Arch: "x86", Ext: ".exe"},
 	"win-x86-msi": {FileName: "x86", Arch: "x86", Ext: ".msi"},
 	"win-x86-zip": {FileName: "win-x86", Arch: "x86", Ext: ".zip"},
+}
+
+func (i IndexItem) ToVersionedUrl() repo_standard.VersionedUrl {
+	dl_list := i.DownloadList()
+	m := map[repo_standard.Platform]map[repo_standard.Arch]string{
+		repo_standard.PlatformWin: {
+			repo_standard.ArchX64:   tryGetWinUrl(dl_list, "win-x64"),
+			repo_standard.ArchARM64: tryGetWinUrl(dl_list, "win-arm64"),
+			repo_standard.ArchX86:   tryGetWinUrl(dl_list, "win-x86"),
+		},
+		repo_standard.PlatformMac: {
+			repo_standard.ArchX64:   dl_list["osx-x64-pkg"],
+			repo_standard.ArchARM64: dl_list["osx-arm64-tar"],
+		},
+		repo_standard.PlatformLinux: {
+			repo_standard.ArchX64:   dl_list["linux-x64"],
+			repo_standard.ArchARM64: dl_list["linux-arm64"],
+		},
+	}
+	return repo_standard.VersionedUrl{
+		Version: i.Version,
+		Urls:    m,
+	}
+}
+
+func tryGetWinUrl(dlList map[string]string, winPrefix string) string {
+	seq := []string{"msi", "exe", "zip"}
+	for _, v := range seq {
+		if url, ok := dlList[winPrefix+"-"+v]; ok {
+			return url
+		}
+	}
+	return ""
 }
