@@ -1,9 +1,13 @@
 package serv
 
 import (
+	"fmt"
 	"github.com/KevinZonda/repo/repo_collection"
 	"github.com/KevinZonda/repo/repo_standard"
 	"github.com/gin-gonic/gin"
+	"github.com/mileusna/useragent"
+	"html/template"
+	"net/http"
 )
 
 func Gin() *gin.Engine {
@@ -40,4 +44,42 @@ func API(r gin.IRouter) {
 		pkg := repo.Packages[name].Versions[version].Urls[repo_standard.Platform(platform)][repo_standard.Arch(arch)]
 		c.Redirect(302, pkg)
 	})
+}
+
+func Html(r *gin.Engine) {
+	r.FuncMap = template.FuncMap{
+		"notnil": func(a any) bool {
+			return a != nil
+		},
+	}
+
+	r.LoadHTMLGlob("templates/*")
+
+	r.GET("/", func(c *gin.Context) {
+		ua := c.Request.UserAgent()
+		ua_s := useragent.Parse(ua)
+
+		platfm := c.Query("platform")
+		switch platfm {
+		case "win", "mac", "linux":
+		default:
+			if ua_s.IsWindows() || ua_s.IsAndroid() {
+				platfm = "win"
+			} else if ua_s.IsMacOS() || ua_s.IsIOS() {
+				platfm = "mac"
+			} else if ua_s.IsLinux() {
+				platfm = "linux"
+			} else {
+				platfm = "win"
+			}
+		}
+		fmt.Println(platfm)
+		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+			"title":    "Main website",
+			"UA":       ua,
+			"seq":      seq().Template(),
+			"platform": platfm,
+		})
+	})
+
 }

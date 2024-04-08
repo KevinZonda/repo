@@ -1,6 +1,7 @@
 package repo_collection
 
 import (
+	"encoding/json"
 	_go "github.com/KevinZonda/repo/devrepo/go"
 	"github.com/KevinZonda/repo/devrepo/node"
 	"github.com/KevinZonda/repo/entertainrepo"
@@ -35,6 +36,17 @@ func (c Collection) FullRepository() repo_standard.FullRepository {
 		c.syncCache()
 	}
 	return *cache
+}
+
+func (c Collection) Template() map[string]any {
+	if cache == nil {
+		c.syncCache()
+	}
+	v := *cache
+	bs, _ := json.Marshal(v)
+	var m map[string]any
+	_ = json.Unmarshal(bs, &m)
+	return m
 }
 
 var l sync.Mutex

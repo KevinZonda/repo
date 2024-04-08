@@ -1,0 +1,42 @@
+<p>Platform: {{.platform}}</p>
+<p>Available Platform:
+    <a href="?platform=win">Windows</a>
+    <a href="?platform=linux">Linux</a>
+    <a href="?platform=mac">macOS (Darwin)</a>
+</p>
+<p>UA: {{.UA}}</p>
+
+<br>
+
+{{range $idx, $pkg := .seq.packages}}
+    {{$pkg.display_name}}
+
+    {{if eq (notnil $pkg.versions) false}}
+        <span>N/A</span>
+        <br>
+        {{continue}}
+    {{end}}
+
+    {{if eq (len $pkg.versions) 0}}
+        <span>N/A</span>
+        <br>
+        {{continue}}
+    {{end}}
+
+    {{range $version, $version_urls := $pkg.versions}}
+        {{$version_urls.version}}
+        {{if not (eq $version $version_urls.version)}}
+            ({{$version}})
+        {{end}}
+
+        {{$v_platform := (index $version_urls.urls $.platform)}}
+        {{if notnil $v_platform}}
+            {{range $v_arch, $v_url := $v_platform}}
+                <a href="{{$v_url}}">{{$v_arch}}</a>
+            {{end}}
+        {{end}}
+    {{end}}
+    <br>
+{{end}}
+
+<p>Updated at: {{.seq.updated}}</p>

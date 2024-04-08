@@ -74,7 +74,11 @@ func filename(version string, platform string) string {
 	if !ok {
 		return ""
 	}
-	return "node-" + version + "-" + r.FileName + r.Ext
+	name := r.FileName
+	if name != "" {
+		name = "-" + name
+	}
+	return "node-" + version + name + r.Ext
 }
 
 type ConversionRule struct {

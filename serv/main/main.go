@@ -14,5 +14,6 @@ func main() {
 	cors_cfg.AllowAllOrigins = true
 	g.Use(cors.New(cors_cfg))
 	serv.API(g)
-	g.Run()
+	serv.Html(g)
+	g.Run("127.0.0.1:8080")
 }
