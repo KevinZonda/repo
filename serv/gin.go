@@ -41,6 +41,13 @@ func API(r gin.IRouter) {
 		version := c.Param("version")
 		repo := seq().FullRepository()
 		pkg := repo.Packages[name].Versions[version].Urls[repo_standard.Platform(platform)][repo_standard.Arch(arch)]
+		if pkg == "" {
+			c.JSON(404, gin.H{
+				"error": "not found",
+			})
+			return
+		}
+
 		c.Redirect(302, pkg)
 	})
 }
