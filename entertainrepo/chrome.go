@@ -33,7 +33,7 @@ func (t Chrome) GetPackage() repo_standard.Package {
 	}
 
 	canary := repo_standard.VersionedUrl{
-		Version: "stable",
+		Version: "canary",
 		Urls: map[repo_standard.Platform]map[repo_standard.Arch]string{
 			repo_standard.PlatformWin: {
 				repo_standard.ArchX64: CHROME_CANARY_WIN,
