@@ -18,13 +18,29 @@ func (n *NodeRepo) GetPackage() repo_standard.Package {
 	if len(n.idx) == 0 {
 		return pkg
 	}
-	latest := n.idx.Latest()
-	lts := n.idx.LatestLts()
+	latest := n.idx.Latest().ToVersionedUrl()
+	lts := n.idx.LatestLts().ToVersionedUrl()
 	pkg.Versions = repo_standard.VersionedUrls{
-		"latest": latest.ToVersionedUrl(),
-		"lts":    lts.ToVersionedUrl(),
+		"latest": latest,
+		"lts":    lts,
+		"stable": lts,
 	}
+	pkg.History = n.allVersions()
+	pkg.History["latest"] = latest
+	pkg.History["lts"] = lts
+	pkg.History["stable"] = lts
 	return pkg
+}
+
+func (n *NodeRepo) allVersions() map[string]repo_standard.VersionedUrl {
+	var m = map[string]repo_standard.VersionedUrl{}
+
+	for _, v := range n.idx {
+		url := v.ToVersionedUrl()
+		m[v.Version] = url
+	}
+	return m
+
 }
 
 var r = NewRepo()

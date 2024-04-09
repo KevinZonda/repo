@@ -36,6 +36,6 @@ func (t Telegram) GetPackage() repo_standard.Package {
 				repo_standard.ArchX64: TelegramDl["linux"],
 			},
 		}),
-	}
+	}.VersionToHistory()
 
 }

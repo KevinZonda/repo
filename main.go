@@ -1,13 +1,19 @@
 package main
 
 import (
+	"github.com/KevinZonda/repo/repo_collection"
 	"github.com/KevinZonda/repo/serv"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"time"
 )
-import "github.com/gin-contrib/cors"
+
+var updateRepo = true
 
 func main() {
-	//repo_collection.R.StartDaemon(2 * time.Hour)
+	if updateRepo {
+		repo_collection.R.StartDaemon(2 * time.Hour)
+	}
 	g := serv.Gin()
 	cors_cfg := cors.DefaultConfig()
 	cors_cfg.AllowAllOrigins = true

@@ -27,7 +27,17 @@ func seq() repo_collection.Collection {
 
 func API(r gin.IRouter) {
 	r.GET("/package", func(c *gin.Context) {
-		c.JSON(200, seq().FullRepository())
+		repo := seq().FullRepository()
+
+		if c.Query("detail") != "true" {
+			copyRepo := repo
+			for k, v := range repo.Packages {
+				v.History = nil
+				copyRepo.Packages[k] = v
+			}
+			repo = copyRepo
+		}
+		c.JSON(200, repo)
 	})
 	r.GET("/package/:name/:version/:platform/:arch", func(c *gin.Context) {
 		defer func() {
@@ -42,7 +52,7 @@ func API(r gin.IRouter) {
 		arch := c.Param("arch")
 		version := c.Param("version")
 		repo := seq().FullRepository()
-		pkg := repo.Packages[name].Versions[version].Urls[repo_standard.Platform(platform)][repo_standard.Arch(arch)]
+		pkg := repo.Packages[name].History[version].Urls[repo_standard.Platform(platform)][repo_standard.Arch(arch)]
 		if pkg == "" {
 			c.JSON(404, gin.H{
 				"error": "not found",

@@ -42,6 +42,5 @@ func (v VSCodeRepo) GetPackage() repo_standard.Package {
 				},
 			},
 		},
-	}
-
+	}.VersionToHistory()
 }

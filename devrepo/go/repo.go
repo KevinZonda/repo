@@ -18,13 +18,26 @@ func (n *GoRepo) GetPackage() repo_standard.Package {
 	if len(n.idx) == 0 {
 		return pkg
 	}
-	latest := n.idx.Latest()
-	stable := n.idx.Stable()
+	latest := n.idx.Latest().VersionedUrl()
+	stable := n.idx.Stable().VersionedUrl()
 	pkg.Versions = repo_standard.VersionedUrls{
-		"latest": latest.VersionedUrl(),
-		"stable": stable.VersionedUrl(),
+		"latest": latest,
+		"stable": stable,
 	}
+	pkg.History = n.allVersions()
+	pkg.History["latest"] = latest
+	pkg.History["stable"] = stable
+
 	return pkg
+}
+
+func (n *GoRepo) allVersions() map[string]repo_standard.VersionedUrl {
+	var m = map[string]repo_standard.VersionedUrl{}
+	for _, v := range n.idx {
+		url := v.VersionedUrl()
+		m[v.Version] = url
+	}
+	return m
 }
 
 var r = NewRepo()

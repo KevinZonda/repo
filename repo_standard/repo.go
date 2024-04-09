@@ -53,6 +53,12 @@ type Package struct {
 	UName       string        `json:"uid"`
 	Category    string        `json:"category"`
 	Versions    VersionedUrls `json:"versions"`
+	History     VersionedUrls `json:"history"`
+}
+
+func (p Package) VersionToHistory() Package {
+	p.History = p.Versions
+	return p
 }
 
 type FullRepository struct {

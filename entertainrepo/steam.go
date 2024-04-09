@@ -28,6 +28,6 @@ func (s Steam) GetPackage() repo_standard.Package {
 				repo_standard.ArchARM64: SteamDl["mac"],
 			},
 		}),
-	}
+	}.VersionToHistory()
 
 }
