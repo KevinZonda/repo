@@ -2,23 +2,23 @@ package node
 
 import (
 	"github.com/KevinZonda/repo/repo_standard"
-	"time"
+	"github.com/KevinZonda/repo/utils"
 )
 
 type IndexJson []IndexItem
 
 type IndexItem struct {
-	Version  string   `json:"version"`
-	Date     Date     `json:"date"`
-	Files    []string `json:"files"`
-	Npm      string   `json:"npm,omitempty"`
-	V8       string   `json:"v8"`
-	Uv       string   `json:"uv,omitempty"`
-	Zlib     string   `json:"zlib,omitempty"`
-	Openssl  string   `json:"openssl,omitempty"`
-	Modules  string   `json:"modules,omitempty"`
-	Lts      any      `json:"lts"`
-	Security bool     `json:"security"`
+	Version  string     `json:"version"`
+	Date     utils.Date `json:"date"`
+	Files    []string   `json:"files"`
+	Npm      string     `json:"npm,omitempty"`
+	V8       string     `json:"v8"`
+	Uv       string     `json:"uv,omitempty"`
+	Zlib     string     `json:"zlib,omitempty"`
+	Openssl  string     `json:"openssl,omitempty"`
+	Modules  string     `json:"modules,omitempty"`
+	Lts      any        `json:"lts"`
+	Security bool       `json:"security"`
 }
 
 func (i IndexItem) IsLts() bool {
@@ -30,18 +30,6 @@ func (i IndexItem) IsLts() bool {
 	default:
 		return false
 	}
-}
-
-type Date string
-
-func (d *Date) UnmarshalJSON(bytes []byte) error {
-	dd, err := time.Parse(`"2006-01-02"`, string(bytes))
-	if err != nil {
-		return err
-	}
-	*d = Date(dd.Format("2006-01-02"))
-
-	return nil
 }
 
 func (j IndexJson) Latest() IndexItem {
