@@ -13,11 +13,13 @@ import (
 )
 
 var R = Collection{
-	entertainrepo.Steam{},
-	entertainrepo.Telegram{},
 	&node.NodeRepo{},
 	&_go.GoRepo{},
 	devrepo.VSCodeRepo{},
+	entertainrepo.Firefox{},
+	entertainrepo.Chrome{},
+	entertainrepo.Steam{},
+	entertainrepo.Telegram{},
 }
 
 type Collection []repo_standard.IRepo
