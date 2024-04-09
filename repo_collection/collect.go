@@ -18,6 +18,7 @@ var R = Collection{
 	&node.NodeRepo{},
 	&_go.GoRepo{},
 	devrepo.VSCodeRepo{},
+	devrepo.VSRepo{},
 	&git.GitRepo{},
 	&msys2.Msys2Repo{},
 	entertainrepo.Firefox{},
