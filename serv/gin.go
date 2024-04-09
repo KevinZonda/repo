@@ -7,6 +7,8 @@ import (
 	"github.com/mileusna/useragent"
 	"html/template"
 	"net/http"
+	"net/http/httputil"
+	"net/url"
 )
 
 func Gin() *gin.Engine {
@@ -48,7 +50,22 @@ func API(r gin.IRouter) {
 			return
 		}
 
-		c.Redirect(302, pkg)
+		proxy := c.Query("proxy")
+		if proxy != "true" {
+			c.Redirect(302, pkg)
+			return
+		}
+		remote, _ := url.Parse(pkg)
+		px := httputil.NewSingleHostReverseProxy(remote)
+		px.Director = func(req *http.Request) {
+			req.Header = c.Request.Header
+			req.Host = remote.Host
+			req.URL = remote
+		}
+
+		px.ServeHTTP(c.Writer, c.Request)
+		return
+
 	})
 }
 
@@ -90,11 +107,13 @@ func Html(r *gin.Engine) {
 		default:
 			platformName = "Unknown"
 		}
+		proxy := c.Query("proxy") == "true"
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
 			"UA":           ua,
 			"seq":          seq().Template(),
 			"platform":     platfm,
 			"platformName": platformName,
+			"proxy":        proxy,
 		})
 	})
 
