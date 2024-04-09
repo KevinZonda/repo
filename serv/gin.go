@@ -29,11 +29,10 @@ func API(r gin.IRouter) {
 	r.GET("/package", func(c *gin.Context) {
 		repo := seq().FullRepository()
 
-		if c.Query("detail") != "true" {
+		if c.Query("full") != "true" {
 			copyRepo := repo
 			for k, v := range repo.Packages {
-				v.History = nil
-				copyRepo.Packages[k] = v
+				copyRepo.Packages[k] = v.WithoutHistory()
 			}
 			repo = copyRepo
 		}
@@ -76,6 +75,73 @@ func API(r gin.IRouter) {
 		px.ServeHTTP(c.Writer, c.Request)
 		return
 
+	})
+	r.GET("/package/:name", func(c *gin.Context) {
+		defer func() {
+			if err := recover(); err != nil {
+				c.JSON(404, gin.H{
+					"error": "not found",
+				})
+			}
+		}()
+		name := c.Param("name")
+		repo := seq().FullRepository()
+		pkg, ok := repo.Packages[name]
+		if !ok {
+			c.JSON(404, gin.H{
+				"error": "not found",
+			})
+			return
+		}
+
+		full := c.Query("history") == "true"
+		if !full {
+			pkg = pkg.WithoutHistory()
+		}
+		c.JSON(200, pkg)
+	})
+
+	r.GET("/package/:name/:version", func(c *gin.Context) {
+		defer func() {
+			if err := recover(); err != nil {
+				c.JSON(404, gin.H{
+					"error": "not found",
+				})
+			}
+		}()
+		name := c.Param("name")
+		version := c.Param("version")
+		repo := seq().FullRepository()
+		pkg, ok := repo.Packages[name].History[version]
+		if !ok {
+			c.JSON(404, gin.H{
+				"error": "not found",
+			})
+			return
+		}
+		c.JSON(200, pkg)
+	})
+
+	r.GET("/package/:name/:version/:platform", func(c *gin.Context) {
+		defer func() {
+			if err := recover(); err != nil {
+				c.JSON(404, gin.H{
+					"error": "not found",
+				})
+			}
+		}()
+		name := c.Param("name")
+		version := c.Param("version")
+		platform := c.Param("platform")
+		repo := seq().FullRepository()
+		pkg, ok := repo.Packages[name].History[version].Urls[repo_standard.Platform(platform)]
+		if !ok {
+			c.JSON(404, gin.H{
+				"error": "not found",
+			})
+			return
+		}
+		c.JSON(200, pkg)
 	})
 }
 

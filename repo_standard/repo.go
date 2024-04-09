@@ -56,6 +56,11 @@ type Package struct {
 	History     VersionedUrls `json:"history"`
 }
 
+func (p Package) WithoutHistory() Package {
+	p.History = nil
+	return p
+}
+
 func (p Package) VersionToHistory() Package {
 	p.History = p.Versions
 	return p
