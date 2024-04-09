@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-const GO_INDEX_URL = "https://go.dev/dl/?mode=json"
+const GO_INDEX_URL = "https://go.dev/dl/?mode=json&include=all"
 
 type Repo struct {
 	hc *http.Client
