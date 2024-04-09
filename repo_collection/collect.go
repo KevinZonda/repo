@@ -3,6 +3,7 @@ package repo_collection
 import (
 	"encoding/json"
 	"github.com/KevinZonda/repo/devrepo"
+	"github.com/KevinZonda/repo/devrepo/git"
 	_go "github.com/KevinZonda/repo/devrepo/go"
 	"github.com/KevinZonda/repo/devrepo/node"
 	"github.com/KevinZonda/repo/entertainrepo"
@@ -16,6 +17,7 @@ var R = Collection{
 	&node.NodeRepo{},
 	&_go.GoRepo{},
 	devrepo.VSCodeRepo{},
+	&git.GitRepo{},
 	entertainrepo.Firefox{},
 	entertainrepo.Chrome{},
 	entertainrepo.Steam{},
