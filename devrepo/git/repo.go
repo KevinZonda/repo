@@ -32,6 +32,9 @@ func (n *GitRepo) GetPackage() repo_standard.Package {
 		"latest": current,
 		"stable": current,
 	}
+	if n.idx.version != "" {
+		pkg.Versions[n.idx.version] = current
+	}
 	pkg.History = pkg.Versions
 	return pkg
 }

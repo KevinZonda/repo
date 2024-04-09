@@ -53,7 +53,7 @@ type Package struct {
 	UName       string        `json:"uid"`
 	Category    string        `json:"category"`
 	Versions    VersionedUrls `json:"versions"`
-	History     VersionedUrls `json:"history"`
+	History     VersionedUrls `json:"history,omitempty"`
 }
 
 func (p Package) WithoutHistory() Package {
