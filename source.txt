@@ -16,3 +16,8 @@ WinAppRuntime: https://aka.ms/windowsappsdk/1.4/1.4.240211001/windowsappruntimei
 https://github.com/microsoft/WindowsAppSDK/releases?page=2
 https://aka.ms/windowsappsdk/1.5/latest/windowsappruntimeinstall-x64.exe
 https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/release-channels
+
+VSCode
+https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user
+win32arm64user
+https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal

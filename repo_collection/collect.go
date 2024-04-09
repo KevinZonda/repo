@@ -2,6 +2,7 @@ package repo_collection
 
 import (
 	"encoding/json"
+	"github.com/KevinZonda/repo/devrepo"
 	_go "github.com/KevinZonda/repo/devrepo/go"
 	"github.com/KevinZonda/repo/devrepo/node"
 	"github.com/KevinZonda/repo/entertainrepo"
@@ -16,6 +17,7 @@ var R = Collection{
 	entertainrepo.Telegram{},
 	&node.NodeRepo{},
 	&_go.GoRepo{},
+	devrepo.VSCodeRepo{},
 }
 
 type Collection []repo_standard.IRepo
