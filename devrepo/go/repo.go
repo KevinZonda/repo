@@ -3,6 +3,7 @@ package _go
 import (
 	"github.com/KevinZonda/repo/repo_standard"
 	"log"
+	"strings"
 )
 
 type GoRepo struct {
@@ -36,6 +37,7 @@ func (n *GoRepo) allVersions() map[string]repo_standard.VersionedUrl {
 	for _, v := range n.idx {
 		url := v.VersionedUrl()
 		m[v.Version] = url
+		m[strings.TrimLeft(v.Version, "go")] = url
 	}
 	return m
 }
