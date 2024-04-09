@@ -118,11 +118,13 @@ func Html(r *gin.Engine) {
 			platformName = "Unknown"
 		}
 		proxy := c.Query("proxy") == "true"
+		full := c.Query("full") == "true"
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
 			"UA":           ua,
 			"seq":          seq().Template(),
 			"platform":     platfm,
 			"platformName": platformName,
+			"full":         full,
 			"proxy":        proxy,
 		})
 	})
