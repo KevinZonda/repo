@@ -42,10 +42,8 @@ func (n *GoRepo) allVersions() map[string]repo_standard.VersionedUrl {
 	return m
 }
 
-var r = NewRepo()
-
 func (n *GoRepo) Sync() {
-	idx, err := r.fetchIndex()
+	idx, err := fetchIndex()
 	if err != nil {
 		log.Println(err)
 		log.Println("Failed to sync go repo")

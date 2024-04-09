@@ -45,10 +45,8 @@ func (n *NodeRepo) allVersions() map[string]repo_standard.VersionedUrl {
 
 }
 
-var r = NewRepo()
-
 func (n *NodeRepo) Sync() {
-	idx, err := r.fetchIndex()
+	idx, err := fetchIndex()
 	if err != nil {
 		log.Println(err)
 		log.Println("Failed to sync Node repo")

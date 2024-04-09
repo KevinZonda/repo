@@ -7,8 +7,7 @@ import (
 )
 
 func TestNode(t *testing.T) {
-	c := NewRepo()
-	index, err := c.fetchIndex()
+	index, err := fetchIndex()
 	if err != nil {
 		t.Fatal(err)
 		return

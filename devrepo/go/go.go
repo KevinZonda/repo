@@ -3,21 +3,12 @@ package _go
 import (
 	"github.com/KevinZonda/repo/repo_standard"
 	"github.com/KevinZonda/repo/utils"
-	"net/http"
 	"strings"
 )
 
 const GO_INDEX_URL = "https://go.dev/dl/?mode=json&include=all"
 
-type Repo struct {
-	hc *http.Client
-}
-
-func NewRepo() *Repo {
-	return &Repo{hc: http.DefaultClient}
-}
-
-func (r *Repo) fetchIndex() (GoIndex, error) {
+func fetchIndex() (GoIndex, error) {
 	index, err := utils.HttpGetJson[GoIndex](GO_INDEX_URL)
 	return index, err
 }
