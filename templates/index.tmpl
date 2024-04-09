@@ -47,10 +47,11 @@ KevinZonda's Binary Repository (KBR) is a repository without distribution binari
 
         {{$v_platform := (index $version_urls.urls $.platform)}}
         {{if notnil $v_platform}}
-            {{if (or (eq $v_url "") (eq $v_url nil))}}
-                {{continue}}
-            {{end}}
+
             {{range $v_arch, $v_url := $v_platform}}
+                {{if (or (eq $v_url "") (eq $v_url nil))}}
+                    {{continue}}
+                {{end}}
                 {{if $.proxy}}
                     <a href="https://repo.kevinzonda.com/package/{{$pkg_uname}}/{{$version}}/{{$v_arch}}?proxy=true">{{$v_arch}}</a>
                 {{else}}
