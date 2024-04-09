@@ -3,6 +3,7 @@ package node
 import (
 	"github.com/KevinZonda/repo/repo_standard"
 	"log"
+	"strings"
 )
 
 type NodeRepo struct {
@@ -38,6 +39,7 @@ func (n *NodeRepo) allVersions() map[string]repo_standard.VersionedUrl {
 	for _, v := range n.idx {
 		url := v.ToVersionedUrl()
 		m[v.Version] = url
+		m[strings.TrimLeft(v.Version, "v")] = url
 	}
 	return m
 
