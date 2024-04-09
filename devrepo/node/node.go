@@ -1,7 +1,7 @@
 package node
 
 import (
-	"encoding/json"
+	"github.com/KevinZonda/repo/utils"
 	"net/http"
 )
 
@@ -16,12 +16,6 @@ func NewRepo() *Repo {
 }
 
 func (r *Repo) fetchIndex() (IndexJson, error) {
-	resp, err := r.hc.Get(NODE_INDEX_URL)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	var index IndexJson
-	err = json.NewDecoder(resp.Body).Decode(&index)
+	index, err := utils.HttpGetJson[IndexJson](NODE_INDEX_URL)
 	return index, err
 }

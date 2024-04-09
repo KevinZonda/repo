@@ -1,8 +1,8 @@
 package _go
 
 import (
-	"encoding/json"
 	"github.com/KevinZonda/repo/repo_standard"
+	"github.com/KevinZonda/repo/utils"
 	"net/http"
 	"strings"
 )
@@ -18,13 +18,7 @@ func NewRepo() *Repo {
 }
 
 func (r *Repo) fetchIndex() (GoIndex, error) {
-	resp, err := r.hc.Get(GO_INDEX_URL)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	var index GoIndex
-	err = json.NewDecoder(resp.Body).Decode(&index)
+	index, err := utils.HttpGetJson[GoIndex](GO_INDEX_URL)
 	return index, err
 }
 
