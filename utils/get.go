@@ -2,6 +2,7 @@ package utils
 
 import (
 	"encoding/json"
+	"gopkg.in/yaml.v3"
 	"io"
 	"net/http"
 )
@@ -14,6 +15,17 @@ func HttpGetJson[T any](url string) (t T, err error) {
 	}
 	defer resp.Body.Close()
 	err = json.NewDecoder(resp.Body).Decode(&t)
+	return
+}
+
+func HttpGetYaml[T any](url string) (t T, err error) {
+	hc := http.DefaultClient
+	resp, err := hc.Get(url)
+	if err != nil {
+		return
+	}
+	defer resp.Body.Close()
+	err = yaml.NewDecoder(resp.Body).Decode(&t)
 	return
 }
 

@@ -5,6 +5,7 @@ import (
 	"github.com/KevinZonda/repo/devrepo"
 	"github.com/KevinZonda/repo/devrepo/git"
 	_go "github.com/KevinZonda/repo/devrepo/go"
+	"github.com/KevinZonda/repo/devrepo/godot"
 	"github.com/KevinZonda/repo/devrepo/msys2"
 	"github.com/KevinZonda/repo/devrepo/node"
 	"github.com/KevinZonda/repo/entertainrepo"
@@ -21,6 +22,7 @@ var R = Collection{
 	devrepo.VSRepo{},
 	&git.GitRepo{},
 	&msys2.Msys2Repo{},
+	&godot.GodotRepo{},
 	entertainrepo.Firefox{},
 	entertainrepo.Chrome{},
 	entertainrepo.Steam{},
