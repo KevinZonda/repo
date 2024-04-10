@@ -20,6 +20,7 @@ var R = Collection{
 	&_go.GoRepo{},
 	devrepo.VSCodeRepo{},
 	devrepo.VSRepo{},
+	devrepo.RustupRepo{},
 	&git.GitRepo{},
 	&msys2.Msys2Repo{},
 	&godot.GodotRepo{},
