@@ -28,9 +28,11 @@ func (v VSRepo) GetPackage() repo_standard.Package {
 		Category:    "Development",
 		Versions: map[string]repo_standard.VersionedUrl{
 			"stable": v.vurl("community", VS_COM),
-			"pro":    v.vurl("pro", VS_PRO),
-			"com":    v.vurl("com", VS_COM),
-			"ent":    v.vurl("ent", VS_ENT),
+			"latest": v.vurl("community", VS_COM),
+
+			"pro": v.vurl("pro", VS_PRO),
+			"com": v.vurl("com", VS_COM),
+			"ent": v.vurl("ent", VS_ENT),
 
 			"community":    v.vurl("com", VS_COM),
 			"professional": v.vurl("ins", VS_PRO),

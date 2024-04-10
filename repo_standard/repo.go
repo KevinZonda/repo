@@ -15,6 +15,10 @@ func Latest(versionedUrls map[Platform]map[Arch]string) VersionedUrls {
 			Version: "latest",
 			Urls:    versionedUrls,
 		},
+		"stable": {
+			Version: "stable",
+			Urls:    versionedUrls,
+		},
 	}
 }
 
